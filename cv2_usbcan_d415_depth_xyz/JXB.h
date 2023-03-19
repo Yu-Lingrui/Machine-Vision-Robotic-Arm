@@ -35,7 +35,7 @@ void jxb_move() {
 	t = turn_angle;
 	cout << "t = " << t << endl;
 	int flag = 1;
-	// init ×ª¼ç -> X£»
+	// init è½¬è‚© -> Xï¼›
 	if (X >= -5)
 	{
 		if (t < 0) t = 0;
@@ -100,7 +100,7 @@ void jxb_move() {
 	theta3 = M_PI * 4 / 3 - angle4;
 	theta3 = theta3 * 180 / M_PI * 13 / 90;
 
-	/* //Ô­´úÂë
+	/* //åŸä»£ç 
 	if (flag == 0)
 	{
 	x = x * 0.95;
@@ -162,31 +162,33 @@ void jxb_move() {
 	}
 	}*/
 
-	//Move(int id¹Ø½ÚºÅ, char dir·½Ïò, int times´ÎÊı, int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
+	//Move(int idå…³èŠ‚å·, char diræ–¹å‘, int timesæ¬¡æ•°, int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 
 	//Sleep(100);
 
 	//Move(8, '+', 1);
 	//n2 += 5;
 	//n1 += 1;
-	//ÕÅºÏ -> XYZ Í¬²½ //1;
+	//å¼ åˆ -> XYZ åŒæ­¥ //1;
 	thread m2(Move, 2, '-', n2+17, 3, 0, 0, &shoulder3);
 	thread m3(Move, 1, '+', n1, 3, 0, 0, &shoulder2);
 	thread m7(Move, 3, '-', n3, 3, 0, 0, &shoulder4);
+	thread m5(Move, 5, '+', 25, 3, 0, 0, &shoulder5);
   	m2.join();
 	m3.join();
 	m7.join();
-	//-×¥ ÄæÊ±Õë
+	m5.join();
+	//-æŠ“ é€†æ—¶é’ˆ
 	//Move(5, '+', 18);	
 	//Move(2, '-', n2+2);
 	//Move(1, '+', n1+1);
 
-	Move(5, '+', 25);
+	//Move(5, '+', 25);
 	Move(5, '-', 32);
 
 	//Move(1, '-', n1+2);
 	//Move(2, '+', n2+2);
-	//Î¢µ÷
+	//å¾®è°ƒ
 	if (n1 % 2 == 1)
 	{
 		thread m4(Move, 1, '-', n1 / 2 + 1, 3, 0, 0, &shoulder2);
@@ -197,7 +199,7 @@ void jxb_move() {
 		thread m4(Move, 1, '-', n1 / 2, 3, 0, 0, &shoulder2);
 		m4.join();
 	}
-	//·µ»Ø
+	//è¿”å›
 	thread m6(Move, 1, '-', n1 / 2, 3, 0, 0, &shoulder2);
 	thread m5(Move, 2, '+', n2 + 17, 3, 0, 0, &shoulder3);
 	thread m8(Move, 3, '-', n3, 3, 0, 0, &shoulder4);
@@ -207,7 +209,7 @@ void jxb_move() {
 	//Move(1, '+', 1);
 
 	//Move(8, '-', 1);
-	//¸´Î»
+	//å¤ä½
 	if (flag == 0)
 	{
 		Move(8, '-', t);
