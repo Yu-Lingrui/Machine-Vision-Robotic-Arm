@@ -201,10 +201,10 @@ void jxb_move() {
 	}
 	//返回
 	thread m6(Move, 1, '-', n1 / 2, 3, 0, 0, &shoulder2);
-	thread m5(Move, 2, '+', n2 + 17, 3, 0, 0, &shoulder3);
+	thread m9(Move, 2, '+', n2 + 17, 3, 0, 0, &shoulder3);
 	thread m8(Move, 3, '-', n3, 3, 0, 0, &shoulder4);
 	m6.join();
-	m6.join();
+	m9.join();
 	m8.join();
 	//Move(1, '+', 1);
 
