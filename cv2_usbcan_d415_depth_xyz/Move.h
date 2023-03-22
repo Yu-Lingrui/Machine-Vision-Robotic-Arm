@@ -9,18 +9,18 @@
 typedef unsigned char uint8;
 typedef struct shoulder_ctr
 {
-	int curr_angle;			//µ±Ç°½Ç¶È(-359~359)
-	int left_angle;			//×ó¼«ÏŞ½Ç¶È(µ±Ã»ÓĞ×ó¼«ÏŞÊ±ÉèÖÃÎª-360)
-	int right_angle;		//ÓÒ¼«ÏŞ½Ç¶È(µ±Ã»ÓĞÓÒ¼«ÏŞÊ±ÉèÖÃÎª360)
-	int set_angle;			//¹Ø½Ú½á¹¹Ìå¸´Î»½Ç¶È
+	int curr_angle;			//å½“å‰è§’åº¦(-359~359)
+	int left_angle;			//å·¦æé™è§’åº¦(å½“æ²¡æœ‰å·¦æé™æ—¶è®¾ç½®ä¸º-360)
+	int right_angle;		//å³æé™è§’åº¦(å½“æ²¡æœ‰å³æé™æ—¶è®¾ç½®ä¸º360)
+	int set_angle;			//å…³èŠ‚ç»“æ„ä½“å¤ä½è§’åº¦
 }SHOULDER_ctr, * _SHOULDER_ctr;
 
-//¹Ø½Ú½á¹¹ÌåÏŞÎ»ºÍ¸´Î»È«¾Ö±äÁ¿
-SHOULDER_ctr shoulder1 = { 0, -60, 60, 0 };	//¼çĞı×ª(¹Ø½Ú8)
-SHOULDER_ctr shoulder2 = { 0, -75, 90, -67 };	//¼ç°Ú¶¯(¹Ø½Ú1)
-SHOULDER_ctr shoulder3 = { 0, 60, 160, 130 };	//Öâ1(¹Ø½Ú2)
-SHOULDER_ctr shoulder4 = { 0, -80, 80, -67 };	//Öâ2(¹Ø½Ú3)
-SHOULDER_ctr shoulder5 = { 0, 6, 90, 30 };	//×¦ÕÅºÏ(¹Ø½Ú5)
+//å…³èŠ‚ç»“æ„ä½“é™ä½å’Œå¤ä½å…¨å±€å˜é‡
+SHOULDER_ctr shoulder1 = { 0, -60, 60, 0 };	//è‚©æ—‹è½¬(å…³èŠ‚8)
+SHOULDER_ctr shoulder2 = { 0, -75, 90, -67 };	//è‚©æ‘†åŠ¨(å…³èŠ‚1)
+SHOULDER_ctr shoulder3 = { 0, 60, 160, 130 };	//è‚˜1(å…³èŠ‚2)
+SHOULDER_ctr shoulder4 = { 0, -80, 80, -67 };	//è‚˜2(å…³èŠ‚3)
+SHOULDER_ctr shoulder5 = { 0, 6, 90, 30 };	//çˆªå¼ åˆ(å…³èŠ‚5)
 
 //****************************************************************************************************//
 const unsigned char CRC8Table[256] = {
@@ -61,7 +61,7 @@ UCHAR GetCRC8(unsigned char* ptr, unsigned int len)
 //		crc8 = CRC8Table[crc8 ^ *ptr];
 //		ptr++;
 //	}
-//	if (crc8)//½á¹û²»ÎªÁã,ÓĞ´íÎó
+//	if (crc8)//ç»“æœä¸ä¸ºé›¶,æœ‰é”™è¯¯
 //	{
 //		return 0;
 //	}
@@ -76,7 +76,7 @@ void Move(int id, char dir, int times, int nDeviceType = 3, int nDeviceInd = 0, 
 	std::cout << cmd << std::endl;
 	/*if (CHECKCRC8(cmd, 6))
 	{
-		std::cout << "CRCÕıÈ·" << std::endl;
+		std::cout << "CRCæ­£ç¡®" << std::endl;
 	}*/
 	VCI_CAN_OBJ frameinfo;
 	//VCI_CAN_OBJ frame;
@@ -92,35 +92,35 @@ void Move(int id, char dir, int times, int nDeviceType = 3, int nDeviceInd = 0, 
 		//VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frameinfo, 1);
 		if (VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frameinfo, 1) == 1)
 		{
-			std::cout << "Ğ´Èë³É¹¦" << std::endl;
+			std::cout << "å†™å…¥æˆåŠŸ" << std::endl;
 		}
 		else
 		{
-			std::cout << "Ğ´ÈëÊ§°Ü" << std::endl;
+			std::cout << "å†™å…¥å¤±è´¥" << std::endl;
 		}
 		/********************************************************************************************/
-		//if (VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &frame, 1, 1))// ¶àÏß³Ìµ÷ÓÃ±ØĞëÃë½ÓÊÕ:-1!(»¹ÊÇ²»ĞĞ!)
+		//if (VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &frame, 1, 1))// å¤šçº¿ç¨‹è°ƒç”¨å¿…é¡»ç§’æ¥æ”¶:-1!(è¿˜æ˜¯ä¸è¡Œ!)
 		//{
-		//	std::cout << "¶ÁÈ¡³É¹¦" << std::endl;
+		//	std::cout << "è¯»å–æˆåŠŸ" << std::endl;
 		//	unsigned char* pdata = &frame.Data[0];
-		//	if ((frame.DataLen >= 5) && (pdata[0] == 'G') && (pdata[1] == 'S'))//Õı³£Ä£Ê½
+		//	if ((frame.DataLen >= 5) && (pdata[0] == 'G') && (pdata[1] == 'S'))//æ­£å¸¸æ¨¡å¼
 		//	{
 		//		short temp_value = 0;
 		//		int m_CurrPos;
 		//		/*int NodeID = frame.ID - 0x20;
-		//		std::cout << "¹Ø½ÚID£º " << NodeID << std::endl;*/
+		//		std::cout << "å…³èŠ‚IDï¼š " << NodeID << std::endl;*/
 		//		temp_value = pdata[2] + (pdata[3] << 8);
 		//		m_CurrPos = (int)temp_value / 64;
-		//		//std::cout << "½Ç¶È£º " << m_CurrPos << std::endl;
-		//		shoulder->curr_angle = m_CurrPos;	 //½Ç¶ÈĞÅÏ¢
+		//		//std::cout << "è§’åº¦ï¼š " << m_CurrPos << std::endl;
+		//		shoulder->curr_angle = m_CurrPos;	 //è§’åº¦ä¿¡æ¯
 		//	}
 		//	else
 		//	{
-		//		std::cout << "¶ÁÈ¡Ê§°Ü" << std::endl;
+		//		std::cout << "è¯»å–å¤±è´¥" << std::endl;
 		//	}
 		//}
 		/********************************************************************************************/
-		//×Ô¶¯¹æ»®Ê±³¬³öÏŞÎ»Ö÷¶¯Í£Ö¹
+		//è‡ªåŠ¨è§„åˆ’æ—¶è¶…å‡ºé™ä½ä¸»åŠ¨åœæ­¢
 		if ((shoulder->curr_angle <= shoulder->left_angle) || (shoulder->curr_angle >= shoulder->right_angle))
 		{
 			break;
@@ -148,21 +148,21 @@ void Move(int id, char dir, int times, int nDeviceType = 3, int nDeviceInd = 0, 
 //	{
 //		if (VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frameinfo, 1) == 1)
 //		{
-//			std::cout << "Ğ´Èë³É¹¦" << std::endl;
+//			std::cout << "å†™å…¥æˆåŠŸ" << std::endl;
 //		}
 //		else
 //		{
-//			std::cout << "Ğ´ÈëÊ§°Ü" << std::endl;
+//			std::cout << "å†™å…¥å¤±è´¥" << std::endl;
 //		}
 //		Sleep(200);
 //	}
 //  
 //}
-//µ¥¿ªÏß³ÌÑ­»·Ò»Ö±²éÑ¯¸÷¸ö¹Ø½Ú½Ç¶È,·ñÔò¶àÏß³ÌÖ»ÄÜË³ĞòÖ´ĞĞ»ò¶¨Òå²»Í¬º¯ÊıÈë¿Ú 
+//å•å¼€çº¿ç¨‹å¾ªç¯ä¸€ç›´æŸ¥è¯¢å„ä¸ªå…³èŠ‚è§’åº¦,å¦åˆ™å¤šçº¿ç¨‹åªèƒ½é¡ºåºæ‰§è¡Œæˆ–å®šä¹‰ä¸åŒå‡½æ•°å…¥å£ 
 void Rcv(int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 {	
 	/*******************************************************************************/
-	unsigned char _cmd[6] = { 'A', 'M', '+', 0x01, 0x04 , 0}; // ²éÑ¯½Ç¶È
+	unsigned char _cmd[6] = { 'A', 'M', '+', 0x01, 0x04 , 0}; // æŸ¥è¯¢è§’åº¦
 	_cmd[5] = GetCRC8(_cmd, 5);
 	VCI_CAN_OBJ frame;
 	VCI_CAN_OBJ Frame;
@@ -173,29 +173,35 @@ void Rcv(int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 	frame.ID = 8;
 	frame.SendType = 0;
 	unsigned char* _pdata = &Frame.Data[0];
+	short tempvalue = 0;
 	VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frame, 1);
 	VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &Frame, 1, 10);
-	shoulder1.curr_angle = (int)(_pdata[2] + (_pdata[3] << 8)) / 64;
+	tempvalue = _pdata[2] + (_pdata[3] << 8);
+	shoulder1.curr_angle = (int)tempvalue / 64;
 	Sleep(20);
 	frame.ID = 1;
 	VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frame, 1);
 	VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &Frame, 1, 10);
-	shoulder2.curr_angle = (int)(_pdata[2] + (_pdata[3] << 8)) / 64;
+	tempvalue = _pdata[2] + (_pdata[3] << 8);
+	shoulder2.curr_angle = (int)tempvalue / 64;
 	Sleep(20);
 	frame.ID = 2;
 	VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frame, 1);
 	VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &Frame, 1, 10);
-	shoulder3.curr_angle = (int)(_pdata[2] + (_pdata[3] << 8)) / 64;
+	tempvalue = _pdata[2] + (_pdata[3] << 8);
+	shoulder3.curr_angle = (int)tempvalue / 64;
 	Sleep(20);
 	frame.ID = 3;
 	VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frame, 1);
 	VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &Frame, 1, 10);
-	shoulder4.curr_angle = (int)(_pdata[2] + (_pdata[3] << 8)) / 64;
+	tempvalue = _pdata[2] + (_pdata[3] << 8);
+	shoulder4.curr_angle = (int)tempvalue / 64;
 	Sleep(20);
 	frame.ID = 5;
 	VCI_Transmit(nDeviceType, nDeviceInd, nCANIndint, &frame, 1);
 	VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &Frame, 1, 10);
-	shoulder5.curr_angle = (int)(_pdata[2] + (_pdata[3] << 8)) / 64;
+	tempvalue = _pdata[2] + (_pdata[3] << 8);
+	shoulder5.curr_angle = (int)tempvalue / 64;
 	/*********************************************************************************/
 	while (true)
 	{	
@@ -205,15 +211,15 @@ void Rcv(int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 		len = VCI_Receive(nDeviceType, nDeviceInd, nCANIndint, &_frame, 1, 10); // VCI_Receive(3, 0, 0, frame, 50, 200)
 		if (len <= 0)
 		{
-			std::cout << "¶ÁÈ¡Ê§°Ü" << std::endl;
+			std::cout << "è¯»å–å¤±è´¥" << std::endl;
 		}										 
 		else
 		{
-			std::cout << "¶ÁÈ¡³É¹¦" << std::endl;
+			std::cout << "è¯»å–æˆåŠŸ" << std::endl;
 			/*for (i = 0; i < len; i++)
 			{*/
 				unsigned char* pdata = &_frame.Data[0];
-				if ((_frame.DataLen >= 5) && (pdata[0] == 'G') && (pdata[1] == 'S'))//Õı³£Ä£Ê½
+				if ((_frame.DataLen >= 5) && (pdata[0] == 'G') && (pdata[1] == 'S'))//æ­£å¸¸æ¨¡å¼
 				{
 					short temp_value = 0;
 					int m_CurrPos;
@@ -242,7 +248,7 @@ void Rcv(int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 					}
 					else
 					{
-						std::cout << "ID´íÎó" << std::endl;
+						std::cout << "IDé”™è¯¯" << std::endl;
 					}
 
 				}
