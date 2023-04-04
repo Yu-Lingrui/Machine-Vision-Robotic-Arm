@@ -17,10 +17,10 @@ typedef struct shoulder_ctr
 
 //关节结构体限位和复位全局变量
 SHOULDER_ctr shoulder1 = { 0, -60, 60, 0 };	//肩旋转(关节8)
-SHOULDER_ctr shoulder2 = { 0, -75, 90, -67 };	//肩摆动(关节1)
-SHOULDER_ctr shoulder3 = { 0, 60, 160, 130 };	//肘1(关节2)
-SHOULDER_ctr shoulder4 = { 0, -80, 80, -67 };	//肘2(关节3)
-SHOULDER_ctr shoulder5 = { 0, 6, 90, 30 };	//爪张合(关节5)
+SHOULDER_ctr shoulder2 = { 0, -75, 90, -70 };	//肩摆动(关节1)
+SHOULDER_ctr shoulder3 = { 0, 100, 160, 150 };	//肘1(关节2)
+SHOULDER_ctr shoulder4 = { 0, -80, 80, -40 };	//肘2(关节3)
+SHOULDER_ctr shoulder5 = { 0, 6, 90, 20 };	//爪张合(关节5)
 
 //****************************************************************************************************//
 const unsigned char CRC8Table[256] = {
