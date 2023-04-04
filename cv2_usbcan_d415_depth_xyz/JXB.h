@@ -37,7 +37,7 @@ void jxb_move() {
 	t = turn_angle;
 	cout << "t = " << t << endl;
 	int flag = 1;
-	// init ×ª¼ç -> X£»
+	// init è½¬è‚© -> Xï¼›
 	if (X <= -5)
 	{
 		if (t < 0) t = 0;
@@ -141,13 +141,12 @@ void jxb_move() {
 	n1 = theta1;
 	n2 = theta2;
 	//n3 = theta3;
-	/*****Î¢µ÷,¶ÀÁ¢ÑéÖ¤×¼È·ĞÔ,¸ù¾İ·´À¡ÊµÊ±¸ú×ÙÑ­»·,½â¾ö¶àÏß³ÌCanÊÕ·¢²»ÁéÃô¸ĞµÄÎÊÌâ*****/
-	/*shoulder1.curr_angle = shoulder1.set_angle;
-	shoulder4.curr_angle = shoulder1.set_angle;
+	/*****å¾®è°ƒ,ç‹¬ç«‹éªŒè¯å‡†ç¡®æ€§,æ ¹æ®åé¦ˆå®æ—¶è·Ÿè¸ªå¾ªç¯,è§£å†³å¤šçº¿ç¨‹Canæ”¶å‘ä¸çµæ•æ„Ÿçš„é—®é¢˜*****/
+	/*
 	int shoulder2_set_angle = shoulder2.set_angle;
 	int shoulder3_set_angle = shoulder3.set_angle;
-	shoulder2.set_angle = theta1;
-	shoulder3.set_angle = theta2;
+	shoulder2.set_angle = n1;
+	shoulder3.set_angle = n2;
 	thread m0 = thread(reset);
 	m0.join();*/
 	/************************************************/
@@ -183,14 +182,14 @@ void jxb_move() {
 	}
 	}*/
 
-	//Move(int id¹Ø½ÚºÅ, char dir·½Ïò, int times´ÎÊı, int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
+	//Move(int idå…³èŠ‚å·, char diræ–¹å‘, int timesæ¬¡æ•°, int nDeviceType = 3, int nDeviceInd = 0, int nCANIndint = 0)
 
 	//Sleep(100);
 
 	//Move(8, '+', 1);
 	//n2 += 5;
 	//n1 += 1;
-	//ÕÅºÏ -> XYZ Í¬²½ //1;
+	//å¼ åˆ -> XYZ åŒæ­¥ //1;
 	thread m2(Move, 2, '-', n2 + 17, 3, 0, 0, &shoulder3);
 	thread m3(Move, 1, '+', n1, 3, 0, 0, &shoulder2);
 	//thread m7(Move, 3, '-', n3, 3, 0, 0, &shoulder4);
@@ -199,7 +198,7 @@ void jxb_move() {
 	m3.join();
 	//m7.join();
 	m5.join();
-	//-×¥ ÄæÊ±Õë
+	//-æŠ“ é€†æ—¶é’ˆ
 	//Move(5, '+', 18);	
 	//Move(2, '-', n2+2);
 	//Move(1, '+', n1+1);
@@ -209,7 +208,7 @@ void jxb_move() {
 
 	//Move(1, '-', n1+2);
 	//Move(2, '+', n2+2);
-	//·µ»Ø
+	//è¿”å›
 	/********************/
 	/*shoulder2.set_angle = shoulder2_set_angle;
 	shoulder3.set_angle = shoulder3_set_angle;
@@ -235,14 +234,14 @@ void jxb_move() {
 	//Move(1, '+', 1);
 
 	//Move(8, '-', 1);
-	//¸´Î»
+	//å¤ä½
 	if (flag == 0)
 	{
 		Move(8, '+', t);
 	}
 	else Move(8, '-', t);
 	
-	cout << "×¥È¡½áÊø!" << endl;
+	cout << "æŠ“å–ç»“æŸ!" << endl;
 	//m4.join();
 	//m5.join();
 }
