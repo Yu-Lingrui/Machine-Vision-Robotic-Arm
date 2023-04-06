@@ -136,38 +136,23 @@ void jxb_move() {
 	theta2 = 150 - theta2 * 180 / M_PI;
 	//theta2 = theta2 * 180 / M_PI;
 	
-
 	int n1, n2, n3;
 	n1 = theta1;
 	n2 = theta2;
 	//n3 = theta3;
 	/*****微调,独立验证准确性,根据反馈实时跟踪循环,解决多线程Can收发不灵敏感的问题*****/
 	/*
+	int shoulder1_set_angle = shoulder1.set_angle;
+	int shoulder4_set_angle = shoulder4.set_angle;
 	int shoulder2_set_angle = shoulder2.set_angle;
 	int shoulder3_set_angle = shoulder3.set_angle;
 	shoulder2.set_angle = n1;
 	shoulder3.set_angle = n2;
+	shoulder4.set_angle = shoulder4.curr_angle;
+	shoulder1.set_angle = shoulder1.curr_angle;
 	thread m0 = thread(reset);
 	m0.join();*/
 	/************************************************/
-	if (Z >= 80)
-	{
-		n1 = n1 + 25; //0.82
-		n2 = n2; //0.85;
-		//n3 = n3 * 0.6; //0.6
-	}
-	else if (Z >= 50)
-	{
-		n1 = n1 + 35; //0.82
-		n2 = n2; //0.85;
-		//n3 = n3 * 0.6; //0.6
-	}
-	else
-	{
-		n1 = n1 + 35; 
-		n2 = n2; 
-		//n3 = n3 * 0.6; 
-	}
 	cout << "n1 " << n1 << endl;
 	cout << "n2 " << n2 << endl;
 	//cout << "n3 " << n3 << endl;
@@ -210,7 +195,9 @@ void jxb_move() {
 	//Move(2, '+', n2+2);
 	//返回
 	/********************/
-	/*shoulder2.set_angle = shoulder2_set_angle;
+	/*shoulder1.set_angle = shoulder1_set_angle;
+	shoulder4.set_angle = shoulder4_set_angle;
+	shoulder2.set_angle = shoulder2_set_angle;
 	shoulder3.set_angle = shoulder3_set_angle;
 	thread m1 = thread(reset);
 	m1.join();*/
