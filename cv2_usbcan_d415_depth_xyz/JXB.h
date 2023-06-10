@@ -28,7 +28,7 @@ void jxb_move() {
 	/*修复点击距离误差*/
 	//Z = Z - 3;
 	//Y = Y - 1;
-	//安老师D-H旋转坐标法:
+	//D-H旋转坐标法:
 	/******************************/
 	//HSArm *armObj = createArmObj();
 	//int q2anglePara = 1;
@@ -168,7 +168,7 @@ void jxb_move() {
 
 	}
 	cout << "x  " << x << " y  " << y << endl;*/
-	// 安老师两自由度原始版本
+	// 两自由度原始版本
 	//float c;
 	//float beta, cos_beta, alpha, cos_alpha, gama, cos_gama, theta1, theta2;
 	//c = sqrt(a2 * a2 + a3 * a3 - 2 * a2 * a3 * cos(M_PI - angle));
