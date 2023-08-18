@@ -17,9 +17,9 @@ pip install pyrealsense2
 
 **在下面两个环境中测试成功**
 
-- **win11** python 3.8 Pytorch 1.10.2+gpu CUDA 11.3  NVIDIA GeForce MX150
+- **win11** python 3.8 Pytorch 1.10.2+gpu CUDA 11.3  NVIDIA GeForce RTX3600
 
-- **ubuntu18.04**  python 3.6 Pytorch 1.8.1+cpu
+- **ubuntu18.04**  python 3.7 Pytorch 1.8.1+cpu
 
 # 2.Results：
 
